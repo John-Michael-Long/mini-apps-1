@@ -1,9 +1,9 @@
 //NOTES:
 // - the first move always starts with player X
-//the app detects a win or tie and displays an appropriate message
-//a button resets the game for a new round of gameplay
-//once the page loads, no user-generated actions on the page may cause the entire page to reload
-//separate concerns into MVC
+// - the app detects a win or tie and displays an appropriate message
+// - a button resets the game for a new round of gameplay
+// ????? once the page loads, no user-generated actions on the page may cause the entire page to reload
+// - separate concerns into MVC
 
 
 //const newBoard = [["*","*","*"],["*","*","*"],["*","*","*"]]
@@ -34,10 +34,12 @@ var boardModel = {
         }
       } 
     }
-    if(this.columnWin === false){
-      this.checkForRowWin()
-    } else {
+    if(this.columnWin === true){
       console.log('column win by:', this.winningPlayer)
+      renderWin();
+    } else {
+      this.checkForRowWin()
+      
     }
   },
 
@@ -51,10 +53,11 @@ var boardModel = {
         }
       }
     }
-    if(this.rowWin === false){
-     this.checkForMajorDiagWin()
-    } else {
+    if(this.rowWin === true){
       console.log('row win by:', this.winningPlayer)
+      renderWin();
+    } else {
+      this.checkForMajorDiagWin()
     }
   },
 
@@ -65,10 +68,11 @@ var boardModel = {
         this.winningPlayer = this.boardState[0][0];
       }
     }
-    if(this.diagWin === false){
-      this.checkForMinorDiagWin()
-    } else {
+    if(this.diagWin === true){
       console.log('major Diag win by:', this.winningPlayer)
+      renderWin();
+    } else {
+      this.checkForMinorDiagWin()
     }
   },
 
@@ -81,6 +85,27 @@ var boardModel = {
     }
     if(this.diagWin === true){
       console.log('minor diag win by:', this.winningPlayer)
+      renderWin()
+    } else {
+      this.checkForTie();
+    }
+  },
+
+  checkForTie: function(){
+    let i = 0;
+    let j = 0;
+    let tiedGame = false;
+    while(i < 2 && !tiedGame){
+      while(j < 2 && !tiedGame){
+        if(this.boardState[i][j] === ""){
+          tiedGame = false;
+        }
+        j++;
+      };
+      i++;
+    }
+    if(tiedGame){
+      renderTie();
     }
   } 
 }
@@ -107,6 +132,16 @@ var renderView = function(){
       document.getElementById(`row${r}`).innerHTML += boardSquareHTML;
     }
   }
+}
+
+var renderWin = function(){
+  let displayWinHTML = `<span id='displayWin'>Player ${boardModel.winningPlayer} WINS!!! Press reset to play again!</span>`
+  document.getElementById("gameBoard").innerHTML = displayWinHTML;
+}
+
+var renderTie = function(){
+  let displayWinHTML = `<span id='displayTie'>Tie Game!!! Press reset to play again! </span>`
+  document.getElementById("gameBoard").innerHTML = displayWinHTML;
 }
 
 
