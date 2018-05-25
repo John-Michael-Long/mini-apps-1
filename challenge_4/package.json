@@ -1,0 +1,35 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "react-dev": "webpack -d --watch",
+    "babel": "babel client --out-dir public --presets=env,react --source-maps inline --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/John-Michael-Long/hrsf95-mini-apps-1.git"
+  },
+  "author": "JM Long",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/John-Michael-Long/hrsf95-mini-apps-1/issues"
+  },
+  "homepage": "https://github.com/John-Michael-Long/hrsf95-mini-apps-1#readme",
+  "devDependencies": {
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "nodemon": "^1.17.5",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.4"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0"
+  }
+}
